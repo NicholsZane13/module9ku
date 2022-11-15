@@ -1,6 +1,7 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
+const  markdown = require('./utils/generateMarkdown');
 // const { messages } = require('statuses');
 
 // TODO: Create an array of questions for user input
@@ -61,7 +62,7 @@ const questions =
                 type: 'list',
                 name: "license",
                 message: 'Licensing information.',
-                choices: ['MIT', 'GNU GPLv3', 'GNU AGPLv3', 'GNU LGPLv3', 'Mozilla Public License 2.0', 'Alpache License 2.0', 'Boost Software License 2.0', 'The Unilicense'],
+                choices: ['MIT', 'GPLv3', 'AGPLv3', 'LGPLv3', 'Mozilla', 'Alpache', 'Unilicense'],
                 filter(val) {
                     return val.toLowerCase();
                 },
@@ -82,101 +83,29 @@ const questions =
                 message: 'Any tests for the application, and explain how to run them.',
             },
         ]
-//     .then(({
-//         fname,
-//         email,
-//         github,
-//         repo,
-//         title,
-//         description,
-//         install,
-//         usage,
-//         credits,
-//         license,
-//         feature,
-//         contribute,
-//         test,
-//     }) => {
-//         const template = `
-// # ${title}
-
-// ${repo}
-
-// ## Description 
-
-// ${description}
 
 
-// ## Table of Contents
+// TODO: Create a function to write README file
+function writeToFile(fileName, data) {}
 
-// If your README is very long, add a table of contents to make it easy for users to find what they need.
+// TODO: Create a function to initialize app
+function init() {}
 
-// * [Installation](#installation)
-// * [Usage](#usage)
-// * [Credits](#credits)
-// * [License](#license)
-
-
-// ## Installation
-
-// ${install}
-
-// ## Usage 
-
-// ${usage}
-
-// ## Credits
-
-// ${credits}
-
-
-// ## License
-
-// ${license}
-
-// ---
-
-// 🏆 The sections listed above are the minimum for a good README, but your project will ultimately determine the content of this document. You might also want to consider adding the following sections.
-
-// ## Badges
-
-
-// ## Features
-
-// ${feature}
-
-// ## Contributing
-
-// ${contribute}
-
-// ## Tests
-
-// ${test}
-
-// ## Questions
-
-// If there is any questions, please feel free to contact me. My name is ${fname}, and my email is ${email}. 
-// If you'd like to check out any of my other work, check out my github profile at ${github} 
-
-// `
-// }
-// )
-
-// // TODO: Create a function to write README file
-// function writeToFile(fileName, data) {}
-
-// // TODO: Create a function to initialize app
-// function init() {}
-
-// // Function call to initialize app
-// init();
+// Function call to initialize app
+init();
 
 
 async function runQuery() {
     return inquirer.prompt(questions)
-    .then((answers) => {
-        console.log(answers)
-        return answers;
+    .then((data) => {
+        const mark = markdown(data)
+        fs.writeFile("README.md", mark, function(err) {
+            if (err) {
+                console.log("Could not write README.md", err);
+            } else {
+                console.log("New README created!");
+            }
+        })
     })
     .catch((error) => {
         console.log(error)
