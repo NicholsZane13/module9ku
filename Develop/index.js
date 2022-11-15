@@ -1,17 +1,14 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
-const { messages } = require('statuses');
+// const { messages } = require('statuses');
 
 // TODO: Create an array of questions for user input
-const questions = [];
-
-inquirer
-    .prompt(
+const questions =
         [
             {
                 type: 'input',
-                name: "name",
+                name: "fname",
                 message: 'What is your full name?',
             },
             {
@@ -65,12 +62,9 @@ inquirer
                 name: "license",
                 message: 'Licensing information.',
                 choices: ['MIT', 'GNU GPLv3', 'GNU AGPLv3', 'GNU LGPLv3', 'Mozilla Public License 2.0', 'Alpache License 2.0', 'Boost Software License 2.0', 'The Unilicense'],
-                validate: (value)=> {if(value){return true} else {return "Input is required"}},
-            },
-            {
-                type: 'input',
-                name: "badges",
-                message: 'List of badges. If none, hit enter',
+                filter(val) {
+                    return val.toLowerCase();
+                },
             },
             {
                 type: 'input',
@@ -87,16 +81,106 @@ inquirer
                 name: "test",
                 message: 'Any tests for the application, and explain how to run them.',
             },
-            
-
         ]
-    )
+//     .then(({
+//         fname,
+//         email,
+//         github,
+//         repo,
+//         title,
+//         description,
+//         install,
+//         usage,
+//         credits,
+//         license,
+//         feature,
+//         contribute,
+//         test,
+//     }) => {
+//         const template = `
+// # ${title}
 
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+// ${repo}
 
-// TODO: Create a function to initialize app
-function init() {}
+// ## Description 
 
-// Function call to initialize app
-init();
+// ${description}
+
+
+// ## Table of Contents
+
+// If your README is very long, add a table of contents to make it easy for users to find what they need.
+
+// * [Installation](#installation)
+// * [Usage](#usage)
+// * [Credits](#credits)
+// * [License](#license)
+
+
+// ## Installation
+
+// ${install}
+
+// ## Usage 
+
+// ${usage}
+
+// ## Credits
+
+// ${credits}
+
+
+// ## License
+
+// ${license}
+
+// ---
+
+// 🏆 The sections listed above are the minimum for a good README, but your project will ultimately determine the content of this document. You might also want to consider adding the following sections.
+
+// ## Badges
+
+
+// ## Features
+
+// ${feature}
+
+// ## Contributing
+
+// ${contribute}
+
+// ## Tests
+
+// ${test}
+
+// ## Questions
+
+// If there is any questions, please feel free to contact me. My name is ${fname}, and my email is ${email}. 
+// If you'd like to check out any of my other work, check out my github profile at ${github} 
+
+// `
+// }
+// )
+
+// // TODO: Create a function to write README file
+// function writeToFile(fileName, data) {}
+
+// // TODO: Create a function to initialize app
+// function init() {}
+
+// // Function call to initialize app
+// init();
+
+
+async function runQuery() {
+    return inquirer.prompt(questions)
+    .then((answers) => {
+        console.log(answers)
+        return answers;
+    })
+    .catch((error) => {
+        console.log(error)
+    })
+}
+
+runQuery()
