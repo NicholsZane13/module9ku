@@ -2,7 +2,6 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const  markdown = require('./utils/generateMarkdown');
-// const { messages } = require('statuses');
 
 // TODO: Create an array of questions for user input
 const questions =
@@ -11,21 +10,25 @@ const questions =
                 type: 'input',
                 name: "fname",
                 message: 'What is your full name?',
+                validate: (value)=> {if(value){return true} else {return "Input is required"}},
             },
             {
                 type: 'input',
                 name: "email",
                 message: 'What is your email address?',
+                validate: (value)=> {if(value){return true} else {return "Input is required"}},
             },
             {
                 type: 'input',
                 name: "github",
                 message: 'What is your github profile name?',
+                validate: (value)=> {if(value){return true} else {return "Input is required"}},
             },
             {
                 type: 'input',
                 name: "repo",
                 message: 'What is your repository name?',
+                validate: (value)=> {if(value){return true} else {return "Input is required"}},
             },
             {
                 type: 'input',

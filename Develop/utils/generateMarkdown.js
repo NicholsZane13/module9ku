@@ -18,7 +18,6 @@ function renderLicenseLink(license) {
   return licenseLinks[license] || "";
 }
 function renderLicenseBadge(license) {
-  console.log(license);
   const badges = {
     MIT: "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)",
     GPLv3: "[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)",
