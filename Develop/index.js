@@ -64,7 +64,7 @@ const questions =
                 message: 'Licensing information.',
                 choices: ['MIT', 'GPLv3', 'AGPLv3', 'LGPLv3', 'Mozilla', 'Alpache', 'Unilicense'],
                 filter(val) {
-                    return val.toLowerCase();
+                    return val;
                 },
             },
             {
@@ -83,17 +83,6 @@ const questions =
                 message: 'Any tests for the application, and explain how to run them.',
             },
         ]
-
-
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
-
-// TODO: Create a function to initialize app
-function init() {}
-
-// Function call to initialize app
-init();
-
 
 async function runQuery() {
     return inquirer.prompt(questions)
