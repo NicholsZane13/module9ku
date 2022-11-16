@@ -1,5 +1,35 @@
 // TODO: Create a function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
+
+
+// TODO: Create a function that returns the license link
+// If there is no license, return an empty string
+
+
+// TODO: Create a function that returns the license section of README
+// If there is no license, return an empty string
+
+
+// TODO: Create a function to generate markdown for README
+function renderLicenseSection(license) {
+  if(license) {
+    return `Licensed under the ${renderLicenseLink(license)} license`
+  } else {
+    return "";
+  }
+}
+function renderLicenseLink(license) {
+  const licenseLinks = {
+    MIT: "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)",
+    GPLv3: "[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)",
+    AGPLv3: "[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)",
+    LGPLv3: "[![License: LGPL v3](https://img.shields.io/badge/License-LGPL_v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)",
+    Mozilla: "[![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)",
+    Alpache: "[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)",
+    Unilicense: "[![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)"
+  }
+  return licenseLinks[license] || "";
+}
 function renderLicenseBadge(license) {
   const badges = {
     MIT: "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)",
@@ -13,38 +43,10 @@ function renderLicenseBadge(license) {
   return badges[license] || "";
 }
 
-// TODO: Create a function that returns the license link
-// If there is no license, return an empty string
-function renderLicenseLink(license) {
-  const licenseLinks = {
-    MIT: "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)",
-    GPLv3: "[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)",
-    AGPLv3: "[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)",
-    LGPLv3: "[![License: LGPL v3](https://img.shields.io/badge/License-LGPL_v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)",
-    Mozilla: "[![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)",
-    Alpache: "[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)",
-    Unilicense: "[![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)"
-  }
-  return licenseLinks[license] || "";
-}
-
-// TODO: Create a function that returns the license section of README
-// If there is no license, return an empty string
-function renderLicenseSection(license) {
-  if(license) {
-    return `Licensed under the ${this.renderLicenseLink(license)} license`
-  } else {
-    return "";
-  }
-}
-
-// TODO: Create a function to generate markdown for README
-
 function generateMarkdown(data) {
-return `
-# ${data.title}
+return `  # ${data.title}
 
-${this.renderLicenseBadge(data.license)}
+${renderLicenseBadge(data.license)}
 
 ${data.repo}
 
@@ -78,7 +80,7 @@ ${data.credits}
 
 ## License
 
-${this.renderLicenseSection(data.license)}
+${renderLicenseSection(data.license)}
 
 
 ---
